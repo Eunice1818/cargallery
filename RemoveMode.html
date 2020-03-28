@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RemoveMode</title>
+    <link rel="stylesheet" type="text/css" href="css/navigation.css">
+    <link rel="stylesheet" type="text/css" href="css/RemoveMode.css">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" ></script>
+    <script type="text/javascript" src="js/navigation.js"></script>
+</head>
+<body>
+<div class="background">
+    <div class="nav">
+        <a class="a" href="HomePage.html">HOME</a>
+        <a class="b" href="AboutMe.html">ABOUT ME</a>
+        <a class="c active" href="Gallery.html">GALLERY</a>
+        <a class="d" href="ContactMe.html">CONTACT ME</a>
+    </div>
+    <div class="content">
+        <button onclick="red()" id="add" >GO BACK TO MAIN GALLERY</button>  <button onclick="reset()" id="remove">RESET ALL CHANGES</button>
+        <div id="gallery">
+
+        </div>
+    </div>
+</div>
+
+<script>
+    document.body.style.zoom="90%";
+    var current_images = [];
+
+    function get(success) {
+        var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
+        request.open("GET", "https://api.myjson.com/bins/msinq");
+
+        request.onreadystatechange = function() {
+            if(this.readyState === 4 && this.status === 200) {
+                var images = JSON.parse(this.responseText);
+                success(images);
+            }
+        }
+        request.send();
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        get(function (images) {
+            var tmp = JSON.parse(localStorage.getItem("testJSON"));
+            if(tmp === null)
+                current_images = images;
+            else
+                current_images = tmp;
+            for(var i=0; i<current_images.length; i++)
+            {
+                var element = document.getElementById("gallery");
+                var img = '<span class="images"><img class="pic" onclick="rmv(' + i + ')" src="' + current_images[i].url + '"><span class="text">Name: ' +
+                    current_images[i].name + '</span><br><span class="text">Speed: ' +
+                    current_images[i].speed + '</span><br><span class="text">Price: ' + current_images[i].price +  '</span><br><img onclick="like(this)"' + ' class="ld" src="img/like.jpg"><span class="likes">' +
+                    current_images[i].likes + '</span><img onclick="like(this)"'+ ' class="ld" src="img/dislike.jpg"><span class="dislikes">' + current_images[i].dislikes +' </span></span>' ;
+                element.innerHTML += img;
+            }
+
+        });
+    });
+
+
+    function rmv(index) {
+        if(confirm("Are you sure you want to delete this picture?") === true) {
+            $(".images").click(function () {
+                $(this).remove();
+            });
+            current_images.splice(parseInt(index), 1);
+            for(var i= parseInt(index +1); i < current_images.length; i++)
+            var pic = document.getElementsByClassName("pic");
+            for(var i = parseInt(index) ; i < pic.length; i++) {
+                pic[i].setAttribute("onclick", "rmv(" + parseInt(i-1) + ")");
+            }
+            console.log(current_images);
+            var myJSON = JSON.stringify(current_images);
+            localStorage.setItem("testJSON", myJSON);
+        }
+    }
+
+
+    function red() {
+        window.location.href = "Gallery.html";
+    }
+
+    function reset() {
+        get(function (images) {
+            current_images = images;
+            var myJSON =JSON.stringify(current_images);
+            localStorage.setItem("testJSON", myJSON);
+            red();
+        });
+    }
+
+
+
+</script>
+</body>
+</html>

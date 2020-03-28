@@ -1,0 +1,98 @@
+.arrow {
+    cursor: pointer;
+    position: absolute;
+    top: 33%;
+    width: 0;
+    height: 0;
+    border-style: solid;
+}
+
+#arrow-left {
+    border-width: 60px 70px 60px 0;
+    border-color: transparent white transparent transparent;
+    left: 0;
+    margin-left: 30px;
+}
+
+#arrow-right {
+    border-width: 60px 0 60px 70px;
+    border-color: transparent transparent transparent white;
+    right: 0;
+    margin-right: 30px;
+}
+
+.content {
+    position: absolute;
+    width: 1300px;
+    height: 98%;
+    right: 1%;
+    background: rgba(0,0,0,0.8);
+    margin-top: 10px;
+}
+
+#slider {
+    margin: 10px 90px 10px 125px;
+    width: 1050px;
+    height: 97%;
+    display: inline-block;
+    position: relative;
+}
+
+wrapper, img {
+    height: 70%;
+    width: 950px;
+    margin-left: 50px;
+    margin-right: 85px;
+    position: absolute;
+}
+
+.description {
+    color: white;
+    display: inline-block;
+    position: absolute;
+    height: 26%;
+    width: 990px;
+    margin-left: 20px;
+    margin-right: 85px;
+    bottom: -45px;
+    text-align: justify;
+    font-family: Verdana;
+    padding: 10px;
+    font-size: 15px;
+}
+
+.name {
+    display: block;
+    text-align: center;
+    font-size: 40px;
+    margin-bottom: 10px;
+    color: white;
+    font-weight: bold;
+}
+
+#X {
+    height: 100px;
+    width: 100px;
+    background-color: white;
+    border-radius: 5px;
+    position: absolute;
+    transform: scale(0.5);
+    opacity: 0.9;
+    margin-left: 93.2%;
+    margin-top: -15px;
+    float: right;
+    cursor: pointer;
+}
+
+#X:after {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    content: "\274c"; /* use the hex value here... */
+    font-size: 50px;
+    color: #FFF;
+    line-height: 100px;
+    text-align: center;
+}

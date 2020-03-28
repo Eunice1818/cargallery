@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gallery</title>
+    <link rel="stylesheet" type="text/css" href="css/navigation.css">
+    <link rel="stylesheet" type="text/css" href="css/Gallery.css">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" ></script>
+    <script src="jquery-cookie-master/src/jquery.cookie.js"></script>
+    <script type="text/javascript" src="js/navigation.js"></script>
+</head>
+<body>
+<div class="background">
+    <div class="nav">
+        <a class="a" href="HomePage.html">HOME</a>
+        <a class="b" href="AboutMe.html">ABOUT ME</a>
+        <a class="c active" href="#">GALLERY</a>
+        <a class="d" href="ContactMe.html">CONTACT ME</a>
+    </div>
+    <div class="content">
+        <button id="add" onclick="add()" >ADD NEW IMAGE TO GALLERY</button>  <button onclick="red()" id="remove">REMOVE IMAGES FROM GALLERY</button> <button id = "reset" onclick="reset()">RESET ALL</button>
+        <form>
+            <input id="name" class="inputtext" type="text" placeholder="Car Name"><br><br>
+            <input id="url" class="inputtext" type="text" placeholder="Car URL"><br><br>
+            <input id="speed" class="inputtext" type="text" placeholder="Car Speed"><br><br>
+            <input id="price" class="inputtext" type="text" placeholder="Car Price"><br><br>
+            <input id="description" class="inputtext" type="text" placeholder="Car Description"><br><br>
+            <button type="button" id="submit">SUBMIT</button>
+        </form>
+        <div id="gallery">
+
+        </div>
+    </div>
+</div>
+
+<script>
+    var current_images = [];
+
+//        $.getJSON('json/images.json', function (images) {
+    $.getJSON('https://api.myjson.com/bins/msinq', function (images) {    //poradi problemite koi gi pravat Chrome i Mozilla,
+        var tmp = JSON.parse(localStorage.getItem("testJSON"));           //JSON file- ot go postaviv na public link
+        if(tmp === null)                                                  //no toj file go ima isto taka i vo proektnata zadaca
+                current_images = images;
+            else
+                current_images = tmp;        //dokolku ima nekakvi problemi so mojata proektna, mozam slobodno da dojdam
+            init();                          //vo nekoj termin za konsultacii i da ja razgledame zaedno, bidejki kaj mene na
+    });                                      // local host si funkcionira se, na kompjuterot od cimerot se odnesuva poinaku,
+                                            //a na tret kompjuter skroz poinaku, taka da dokolku nastanat greski poradi
+                                            //samiot prelistuvac, Ve molam zemete go toa vo obzir i poglednete go kodot
+
+    $("form").hide();
+
+
+    function init() {
+        var element = document.getElementById("gallery");
+        console.log(current_images);
+        for(var i=0; i<current_images.length; i++)
+        {
+            var img = '<span class="images"><img onclick="redirect(' + i + ')" src="' + current_images[i].url + '"><span class="text">Name: ' +
+                current_images[i].name + '</span><br><span class="text">Speed: ' +
+                current_images[i].speed + '</span><br><span class="text">Price: ' + current_images[i].price +  '</span><br><img onclick="like(this, ' + i + ', true)"' + ' class="ld" src="img/like.jpg"><span class="likes">' +
+                current_images[i].likes + '</span><img onclick="like(this, ' + i + ', false)"'+ ' class="ld" src="img/dislike.jpg"><span class="dislikes">' + current_images[i].dislikes +' </span></span>' ;
+            element.innerHTML += img;
+        }
+    }
+
+    function like(element, index, flag) {
+        var val = parseInt(element.nextSibling.innerHTML);
+        val++;
+        update(index, flag);
+        element.nextSibling.innerHTML = val;
+    }
+
+    function redirect(i) {
+      $.cookie("index", i, {path: '/' });
+      console.log($.cookie("index"));
+        var myJSON =JSON.stringify(current_images);
+        console.log(current_images);
+        localStorage.setItem("testJSON", myJSON);
+        localStorage.setItem("index", i);                 //vo slucaj da ne funkcionira cookies ako ste na Chrome
+        window.location.href = "GallerySlider.html";
+    }
+
+    function red() {
+        alert("Click on the image to delete it!");
+        window.location.href = "RemoveMode.html";
+    }
+
+    function add() {
+        clear();
+        $("#gallery").hide();
+        $("form").show();
+    }
+
+    function add1() {
+        $("#gallery").show();
+        $("form").hide();
+        alert("This image will be added at the bottom of the gallery");
+    }
+
+    function clear() {
+        document.getElementById("name").value = "";
+        document.getElementById("url").value = "";
+        document.getElementById("speed").value = "";
+        document.getElementById("price").value = "";
+        document.getElementById("description").value = "";
+    }
+
+        $("#submit").click(function () {
+            var name = document.getElementById("name").value;
+            var url = document.getElementById("url").value;
+            var speed = document.getElementById("speed").value;
+            var price = document.getElementById("price").value;
+            var description = document.getElementById("description").value;
+
+            var obj = {
+                "url": url,
+                "name": name,
+                "speed": speed,
+                "price": price,
+                "description": description,
+                "likes": "0",
+                "dislikes": "0"
+            };
+
+            if (name === "" || url === "" || speed === "" || price === "" || description === "")
+            {
+                alert("You must fill all fields in the form!");
+            }
+            else {
+                current_images.push(obj);
+                var myJSON =JSON.stringify(current_images);
+                localStorage.setItem("testJSON", myJSON);
+                document.getElementById("gallery").innerHTML = "";
+                init();
+                add1();
+            }
+        });
+
+
+        function update(index, flag) {
+            if(flag)
+                current_images[index].likes = parseInt(current_images[index].likes) + 1;
+            else
+                current_images[index].dislikes = parseInt(current_images[index].dislikes) + 1;
+            var myJSON =JSON.stringify(current_images);
+            localStorage.setItem("testJSON", myJSON);
+        }
+
+        function reset() {
+            $.getJSON('https://api.myjson.com/bins/msinq', function (images) {
+                current_images = images;
+                var myJSON =JSON.stringify(current_images);
+                localStorage.setItem("testJSON", myJSON);
+                window.location.href = "Gallery.html";
+            });
+        }
+</script>
+</body>
+</html>

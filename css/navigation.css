@@ -1,0 +1,80 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    font-size: 14px;
+    font-weight: normal;
+}
+
+.background {
+    width: 100%;
+    height: 100%;
+    background-image: url("http://static.antyweb.pl/uploads/2016/12/Race_Driver_Grid_McLaren_F1jpg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    overflow-y: auto;
+}
+
+.nav {
+    width: 350px;
+    height: auto;
+    position: fixed;
+    top: 20%;
+    left: 0;
+}
+
+.nav a {
+    text-decoration: none;
+    font-size: 28px;
+    font-family: Verdana;
+    font-weight: bold;
+    height: 90px;
+    margin: 5px 0;
+    float: left;
+    display: inline-block;
+    background-color: black;
+    color: white;
+    line-height: 90px;
+    text-align: center;
+    transition: 300ms;
+    opacity: 0.8;
+}
+
+a.active, .nav a:hover {
+    background-color: white;
+    color: black;
+    width: 100%;
+    opacity: 0.9;
+}
+
+.a {
+    width: 95%;
+}
+
+.b {
+    width: 85%;
+}
+
+.c {
+    width: 80%;
+}
+
+.d {
+    width: 90%;
+}
+
+
+
+
+
+
+
+
+
+
+

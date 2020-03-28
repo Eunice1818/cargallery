@@ -1,0 +1,151 @@
+.content {
+    position: absolute;
+    width: 1300px;
+    height: auto;
+    right: 1%;
+    top: 3%;
+    background: rgba(0,0,0,0.8);
+}
+
+.gallery {
+    position: absolute;
+    padding: 50px;
+}
+
+.images {
+    margin: 65px;
+    width: 300px;
+    height: 300px;
+    background-color: black;
+    display: inline-block;
+    position: relative;
+}
+
+img {
+    width: 300px;
+    height: 150px;
+    position: relative;
+}
+
+.images:hover {
+    transform: scale(1.2);
+}
+
+.text {
+    display: inline-block;
+    position: relative;
+    color: white;
+    font-size: 15px;
+    text-align: justify;
+    font-family: Verdana;
+    left: 20px;
+    top: 10px;
+    padding: 1px;
+}
+
+img {
+    cursor: pointer;
+}
+
+.ld {
+    width: 50px;
+    height: 50px;
+    position: static;
+    margin-top: 18px;
+    margin-left: 22px;
+}
+
+.likes, .dislikes {
+    width: 20px;
+    display: inline-block;
+    position: static;
+    color: white;
+    font-size: 15px;
+    text-align: justify;
+    font-family: Verdana;
+    margin-left: 5px;
+    margin-right: 20px;
+    padding: 1px;
+}
+
+#add, #remove, #reset {
+    display: inline-block;
+     width: 370px;
+     text-align: center;
+     height: 50px;
+     border: 3px solid white;
+     color: white;
+     background-color: rgba(0,0,0,0.9);
+     font-size: 20px;
+     margin-right: 2px;
+     margin-left: 45px;
+     margin-top: 20px;
+ }
+
+#add:hover, #remove:hover, #submit:hover, #reset:hover {
+    background-color: rgba(255,255,255,0.9);
+    border: 3px solid black;
+    color: black;
+    cursor: pointer;
+}
+
+form {
+    margin-top: 80px;
+    margin-left: 180px;
+}
+
+.inputtext {
+    width: 55%;
+    height: 65px;
+    border: 3px solid white;
+    color: white;
+    background-color: rgba(0,0,0,0.9);
+    font-size: 20px;
+    padding-left: 5px;
+}
+
+#title {
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 55px;
+}
+
+#typeofmessage {
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+input[type="radio"] {
+    margin-right: 5px;
+    cursor: pointer;
+    transform: scale(1.2);
+}
+
+.types {
+    margin-right: 15px;
+}
+
+#inputmessage {
+    margin-top: 25px;
+    margin-bottom: 60px;
+    width: 55%;
+    height: 150px;
+    border: 3px solid white;
+    color: white;
+    background-color: rgba(0,0,0,0.9);
+    font-size: 20px;
+    padding-left: 5px;
+}
+
+#submit {
+    width: 200px;
+    text-align: center;
+    height: 50px;
+    border: 3px solid white;
+    color: white;
+    background-color: rgba(0,0,0,0.9);
+    font-size: 20px;
+    margin-top: 40px;
+    margin-left: 550px;
+}
+

@@ -1,0 +1,28 @@
+.content {
+    position: absolute;
+    width: 930px;
+    height: 500px;
+    right: 0;
+    top: 27%;
+}
+
+.home {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    color: white;
+    font-family: Verdana;
+}
+
+.home h1 {
+    text-transform: uppercase;
+    font-size: 53px;
+    padding-right: 90px;
+    border-bottom: 1px solid white;
+}
+
+.home h3 {
+    font-size: 20px;
+    padding: 5px 0;
+    opacity: 0.6;
+}

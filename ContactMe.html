@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact me</title>
+    <link rel="stylesheet" type="text/css" href="css/navigation.css">
+    <link rel="stylesheet" type="text/css" href="css/ContactMe.css">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" ></script>
+    <script type="text/javascript" src="js/navigation.js"></script>
+</head>
+<body>
+<div class="background">
+    <div class="nav">
+        <a class="a" href="HomePage.html">HOME</a>
+        <a class="b" href="AboutMe.html">ABOUT ME</a>
+        <a class="c" href="Gallery.html">GALLERY</a>
+        <a class="d active" href="#">CONTACT ME</a>
+    </div>
+    <div class="content">
+        <div class="contactme">
+            <div id="title">Please feel free to contact me</div>
+            <form>
+                <input id="name1" class="inputtext" type="text" placeholder="First Name"><br><br>
+                <input id="name2" class="inputtext" type="text" placeholder="Last Name"><br><br>
+                <label id="typeofmessage">Type of message:</label><br>
+                <input type="radio" name="typeofmessage" value="Question" checked><label class="types">Question</label>
+                <input type="radio" name="typeofmessage" value="Suggestion"><label class="types">Suggestion</label>
+                <input type="radio" name="typeofmessage" value="Criticism"><label class="types">Criticsm</label> <br>
+                <textarea id="inputmessage" cols="4" rows="6" placeholder="Enter your message here..."></textarea><br>
+                <button onclick="contact()" id="submit">SUBMIT</button>  <a id="mail" href="mailto:kostadin.ljatkoski@students.finki.ukim.mk">SEND ME AN E-MAIL</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    function contact() {
+        var first_name = document.getElementById("name1").value;
+        var last_name = document.getElementById("name2").value;
+        var message = document.getElementById("inputmessage").value;
+        var radio = document.getElementsByName("typeofmessage");
+        var type;
+        if(first_name === "" || last_name ==="" || message ==="") {
+            alert("You must fill all fields in the form!");
+            clear();
+        }
+        else {
+            for (var i = 0; i < radio.length; i++) {
+                if (radio[i].checked)
+                    type = radio[i].value;
+            }
+            alert(first_name + " " + last_name + " sent you a message.\nType of message: " + type + "\nMessage: " + message);
+        }
+    }
+
+    function clear() {
+        document.getElementById("name1").innerHTML = "";
+        document.getElementById("name2").innerHTML = "";
+        document.getElementById("inputmessage").innerHTML = "";
+        document.getElementsByName("typeofmessage").value = "Question";
+    }
+
+</script>
+</body>
+</html>

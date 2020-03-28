@@ -1,0 +1,19 @@
+.content {
+    position: absolute;
+    width: 900px;
+    height: 650px;
+    right: 5%;
+    top: 8%;
+    background-color: black;
+    opacity: 0.8;
+}
+
+.aboutme {
+    position: absolute;
+    padding: 50px;
+    color: white;
+    font-size: 22px;
+    text-align: justify;
+    font-family: Verdana;
+}
+

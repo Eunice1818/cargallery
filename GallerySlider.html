@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gallery</title>
+    <link rel="stylesheet" type="text/css" href="css/navigation.css">
+    <link rel="stylesheet" type="text/css" href="css/GallerySlider.css">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" ></script>
+    <script src="jquery-cookie-master/src/jquery.cookie.js"></script>
+    <script type="text/javascript" src="js/navigation.js"></script>
+</head>
+<body>
+<div class="background">
+    <div class="nav">
+        <a class="a" href="HomePage.html">HOME</a>
+        <a class="b" href="AboutMe.html">ABOUT ME</a>
+        <a class="c active" href="Gallery.html">GALLERY</a>
+        <a class="d" href="ContactMe.html">CONTACT ME</a>
+    </div>
+    <div class="content">
+        <a href="Gallery.html" id="X"></a>
+        <div onclick="goLeft()" id="arrow-left" class="arrow"></div>
+        <div onclick="goRight()" id="arrow-right" class="arrow"></div>
+        <div id="slider">
+        </div>
+    </div>
+</div>
+
+<script>
+    document.body.style.zoom="90%";
+    var current_images = [];
+    var current;
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+            current_images = JSON.parse(localStorage.getItem("testJSON"));
+            console.log(current_images);
+            console.log($.cookie("index"));
+            current = $.cookie("index");
+            if(current === undefined)
+            current = parseInt(localStorage.getItem("index"));  //vo slucaj da ne funkcionira cookies ako ste na Chrome
+            console.log(current);
+            show();
+    });
+
+    document.onkeydown = function(evt) {
+        evt = evt || window.event;
+        switch (evt.keyCode) {
+            case 37:
+                goLeft();
+                break;
+            case 39:
+                goRight();
+                break;
+        }
+    };
+
+    function show() {
+        for(var i=0; i<current_images.length; i++)
+        {
+            var element = document.getElementById("slider");
+            var img = '<div class="wrapper"><span class="name">' + current_images[i].name + '</span><img src="' + current_images[i].url +
+                '"><span class="description">' +
+                current_images[i].description + '</span></div>'
+            element.innerHTML += img;
+        }
+        reset();
+        var showElement = document.getElementsByClassName("wrapper")[current];
+        showElement.style.display = "block";
+    }
+
+    function goLeft() {
+        reset();
+        current--;
+        if(current === -1)
+            current = current_images.length -1;
+        var showElement = document.getElementsByClassName("wrapper")[current];
+        showElement.style.display = "block";
+    }
+    
+    function goRight() {
+        reset();
+        current++;
+        if(current === current_images.length)
+            current = 0;
+        var showElement = document.getElementsByClassName("wrapper")[current];
+        showElement.style.display = "block";
+    }
+
+    function reset() {
+        for(var i=0; i<current_images.length; i++) {
+            var hideElement = document.getElementsByClassName("wrapper")[i];
+            hideElement.style.display = "none";
+        }
+    }
+
+</script>
+</body>
+</html>
